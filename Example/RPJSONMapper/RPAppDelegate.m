@@ -10,7 +10,6 @@
 #import "RPJSONMapper.h"
 #import "Person.h"
 #import "RPBoxSpecification.h"
-#import "Car.h"
 
 @implementation RPAppDelegate
 
@@ -25,37 +24,32 @@
 
     NSDictionary *json = @{
             @"firstName" : @"John",
+            @"lastName" : [NSNull null],
             @"age" : @25,
             @"heightInInches" : @68.5,
-            @"languagesKnown" : @[@"Objective-C", @"English"],
-            @"car" : @{
-                    @"make" : @"Ford",
-                    @"model" : @"Mustang"
-            }
+            @"phoneNumber" : @"415-555-1234",
+            @"state" : @"California",
+            @"city" : @"Daly City",
+            @"zip" : @94015,
+            @"socialSecurityNumber" : [NSNull null],
+            @"birthDate" : @"11-08-1988",
+            @"startDate" : @"Nov 05 2012"
     };
 
-    Person *john = [Person new];
-
-    [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json
-                                          toInstance:john
-                                        usingMapping:@{
-                                                @"firstName" : @"firstName",
-                                                @"age" : [[RPJSONMapper sharedInstance] boxValueAsNSStringIntoPropertyWithName:@"age"],
-                                                @"heightInInches" : @"heightInInches",
-                                                @"languagesKnown" : @{
-                                                        @0 : @"languageKnown"
-                                                },
-                                                @"car" : [RPBoxSpecification boxValueIntoPropertyWithName:@"car" usingBlock:^id(id jsonValue) {
-                                                    Car *mustang = [Car new];
-                                                    [[RPJSONMapper sharedInstance] mapJSONValuesFrom:jsonValue
-                                                                                          toInstance:mustang
-                                                                                        usingMapping:@{
-                                                                                                @"make" : @"make",
-                                                                                                @"model" : @"model"
-                                                                                        }];
-                                                    return mustang;
-                                                }]
-                                        }];
+    Person *person = [Person new];
+    [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:person usingMapping:@{
+            @"firstName" : @"firstName",
+            @"lastName" : @"lastName",
+            @"age" : @"age",
+            @"heightInInches" : @"heightInInches",
+            @"phoneNumber" : @"phoneNumber",
+            @"state" : @"state",
+            @"city" : @"city",
+            @"zip" : [[RPJSONMapper sharedInstance] boxValueAsNSStringIntoPropertyWithName:@"zip"],
+            @"socialSecurityNumber" : @"socialSecurityNumber",
+            @"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"],
+            @"startDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"startDate" usingDateFormat:@"MMM dd yyyy"]
+    }];
 
     return YES;
 }

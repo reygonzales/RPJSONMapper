@@ -17,7 +17,6 @@
 		D191834418728A0D0027FB59 /* RPJSONMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D191834318728A0D0027FB59 /* RPJSONMapperTests.m */; };
 		D191835318728AD50027FB59 /* RPBoxSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = D191835018728AD50027FB59 /* RPBoxSpecification.m */; };
 		D191835418728AD50027FB59 /* RPJSONMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D191835218728AD50027FB59 /* RPJSONMapper.m */; };
-		F5D19149FC6270F59CD2AA95 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D19526FA62DEA0BB31DCC8 /* Car.m */; };
 		F5D1939F966C1DCD7B57EDC0 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = F5D198FAAE1692FF1DD65FBB /* Contents.json */; };
 		F5D19469D331C07BF55A5882 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = F5D19E8219190F7E3224F867 /* Contents.json */; };
 		F5D1974E68207817FECE6B81 /* RPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D19A498BB5165E5B72AF7A /* RPAppDelegate.m */; };
@@ -53,13 +52,11 @@
 		D191835218728AD50027FB59 /* RPJSONMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPJSONMapper.m; path = RPJSONMapper/RPJSONMapper.m; sourceTree = "<group>"; };
 		F5D1943A93FD8FE8BA688E93 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		F5D195200B6539C9FEFB9687 /* RPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPAppDelegate.h; path = RPJSONMapper/RPAppDelegate.h; sourceTree = SOURCE_ROOT; };
-		F5D19526FA62DEA0BB31DCC8 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Car.m; path = RPJSONMapper/Car.m; sourceTree = SOURCE_ROOT; };
 		F5D1971C897F8C539B419CB2 /* RPJSONMapper-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; name = "RPJSONMapper-Info.plist"; path = "RPJSONMapper/RPJSONMapper-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F5D197C1D897226D7C6D1569 /* RPJSONMapper-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RPJSONMapper-Prefix.pch"; path = "RPJSONMapper/RPJSONMapper-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		F5D198FAAE1692FF1DD65FBB /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = Contents.json; sourceTree = "<group>"; };
 		F5D19A3C58C377AC3589A4E7 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Person.m; path = RPJSONMapper/Person.m; sourceTree = SOURCE_ROOT; };
 		F5D19A498BB5165E5B72AF7A /* RPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPAppDelegate.m; path = RPJSONMapper/RPAppDelegate.m; sourceTree = SOURCE_ROOT; };
-		F5D19C1435E8763CD25FA130 /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Car.h; path = RPJSONMapper/Car.h; sourceTree = SOURCE_ROOT; };
 		F5D19E1B7F8D0A6CA1189AC8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RPJSONMapper/main.m; sourceTree = SOURCE_ROOT; };
 		F5D19E8219190F7E3224F867 /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = Contents.json; sourceTree = "<group>"; };
 		F5D19EB08B1730459A169C4D /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Person.h; path = RPJSONMapper/Person.h; sourceTree = SOURCE_ROOT; };
@@ -163,11 +160,9 @@
 				F5D19A498BB5165E5B72AF7A /* RPAppDelegate.m */,
 				F5D19F94BBCCAC08BC57B8A5 /* en.lproj */,
 				F5D19E1B7F8D0A6CA1189AC8 /* main.m */,
-				F5D19C1435E8763CD25FA130 /* Car.h */,
 				F5D19A3C58C377AC3589A4E7 /* Person.m */,
 				F5D195200B6539C9FEFB9687 /* RPAppDelegate.h */,
 				F5D19EB08B1730459A169C4D /* Person.h */,
-				F5D19526FA62DEA0BB31DCC8 /* Car.m */,
 				F5D197C1D897226D7C6D1569 /* RPJSONMapper-Prefix.pch */,
 				F5D1971C897F8C539B419CB2 /* RPJSONMapper-Info.plist */,
 				F5D19F4122180466ABD08C3B /* Images.xcassets */,
@@ -305,7 +300,6 @@
 				F5D1974E68207817FECE6B81 /* RPAppDelegate.m in Sources */,
 				F5D197532695BFFF739DABBE /* main.m in Sources */,
 				F5D19C64CD9EBE6D743EB881 /* Person.m in Sources */,
-				F5D19149FC6270F59CD2AA95 /* Car.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

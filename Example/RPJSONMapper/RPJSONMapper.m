@@ -84,7 +84,7 @@
 
     return [RPBoxSpecification boxValueIntoPropertyWithName:propertyName
                                                  usingBlock:^id(id jsonValue) {
-                                                     if (![jsonValue isKindOfClass:[NSString class]]) {
+                                                     if ([jsonValue isKindOfClass:[NSString class]]) {
                                                          NSDate *date;
 
                                                          // Why wrap this in a @synchronized call? Because the RPJSONMapper is
