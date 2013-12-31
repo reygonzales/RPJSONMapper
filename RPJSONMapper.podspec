@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/reygonzales/RPJSONMapper"
   s.license      = 'MIT'
   s.author       = { "Rey Gonzales" => "reynaldo@mail.sfsu.edu" }
-  s.platform     = :ios
+  s.platform     = :ios, '5.0'
   s.source       = { :git => "https://github.com/reygonzales/RPJSONMapper.git", :tag => s.version.to_s }
   s.source_files = 'RPJSONMapper/*.{h,m}'
   s.framework 	 = 'Foundation'
