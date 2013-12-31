@@ -67,16 +67,9 @@
     }
 }
 
-#pragma mark - Debug Logging
-
-- (void)log:(NSString *)message {
-    if(!self.shouldSuppressWarnings)
-        NSLog(@"%@", message);
-}
-
 #pragma mark - Boxing
 
-- (RPBoxSpecification *)boxNSNumberAsNSStringIntoPropertyWithName:(NSString *)propertyName {
+- (RPBoxSpecification *)boxValueAsNSStringIntoPropertyWithName:(NSString *)propertyName {
     return [RPBoxSpecification boxValueIntoPropertyWithName:propertyName
                                                  usingBlock:^id(id jsonValue) {
                                                      if([jsonValue isKindOfClass:[NSNumber class]])
@@ -85,8 +78,8 @@
                                                  }];
 }
 
-- (RPBoxSpecification *)boxNSStringAsNSDateIntoPropertyWithName:(NSString *)propertyName
-                                                usingDateFormat:(NSString *)dateFormat {
+- (RPBoxSpecification *)boxValueAsNSDateIntoPropertyWithName:(NSString *)propertyName
+                                             usingDateFormat:(NSString *)dateFormat {
     __block __weak RPJSONMapper *blockSafeSelf = self;
 
     return [RPBoxSpecification boxValueIntoPropertyWithName:propertyName
@@ -108,6 +101,22 @@
 
                                                      return nil;
                                                  }];
+}
+
+- (RPBoxSpecification *)boxValueAsNSURLIntoPropertyWithName:(NSString *)propertyName {
+    return [RPBoxSpecification boxValueIntoPropertyWithName:propertyName
+                                                 usingBlock:^id(id jsonValue) {
+                                                     if([jsonValue isKindOfClass:[NSString class]])
+                                                         return [NSURL URLWithString:jsonValue];
+                                                     return nil;
+                                                 }];
+}
+
+#pragma mark - Debug Logging
+
+- (void)log:(NSString *)message {
+    if(!self.shouldSuppressWarnings)
+        NSLog(@"%@", message);
 }
 
 #pragma mark - Private Methods

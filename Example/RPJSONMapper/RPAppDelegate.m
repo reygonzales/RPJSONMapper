@@ -40,7 +40,7 @@
                                           toInstance:john
                                         usingMapping:@{
                                                 @"firstName" : @"firstName",
-                                                @"age" : [[RPJSONMapper sharedInstance] boxNSNumberAsNSStringIntoPropertyWithName:@"age"],
+                                                @"age" : [[RPJSONMapper sharedInstance] boxValueAsNSStringIntoPropertyWithName:@"age"],
                                                 @"heightInInches" : @"heightInInches",
                                                 @"languagesKnown" : @{
                                                         @0 : @"languageKnown"
