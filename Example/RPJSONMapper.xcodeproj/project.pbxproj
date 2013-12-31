@@ -1,0 +1,525 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D191831F18728A0C0027FB59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191831E18728A0C0027FB59 /* Foundation.framework */; };
+		D191832118728A0C0027FB59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191832018728A0C0027FB59 /* CoreGraphics.framework */; };
+		D191832318728A0C0027FB59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191832218728A0C0027FB59 /* UIKit.framework */; };
+		D191833818728A0D0027FB59 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191833718728A0D0027FB59 /* XCTest.framework */; };
+		D191833918728A0D0027FB59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191831E18728A0C0027FB59 /* Foundation.framework */; };
+		D191833A18728A0D0027FB59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191832218728A0C0027FB59 /* UIKit.framework */; };
+		D191834218728A0D0027FB59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D191834018728A0D0027FB59 /* InfoPlist.strings */; };
+		D191834418728A0D0027FB59 /* RPJSONMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D191834318728A0D0027FB59 /* RPJSONMapperTests.m */; };
+		D191835318728AD50027FB59 /* RPBoxSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = D191835018728AD50027FB59 /* RPBoxSpecification.m */; };
+		D191835418728AD50027FB59 /* RPJSONMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D191835218728AD50027FB59 /* RPJSONMapper.m */; };
+		F5D19149FC6270F59CD2AA95 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D19526FA62DEA0BB31DCC8 /* Car.m */; };
+		F5D1939F966C1DCD7B57EDC0 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = F5D198FAAE1692FF1DD65FBB /* Contents.json */; };
+		F5D19469D331C07BF55A5882 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = F5D19E8219190F7E3224F867 /* Contents.json */; };
+		F5D1974E68207817FECE6B81 /* RPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D19A498BB5165E5B72AF7A /* RPAppDelegate.m */; };
+		F5D197532695BFFF739DABBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D19E1B7F8D0A6CA1189AC8 /* main.m */; };
+		F5D198048357B5909E8B6DBC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5D198F035969FE4B31D5A9B /* InfoPlist.strings */; };
+		F5D19C64CD9EBE6D743EB881 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D19A3C58C377AC3589A4E7 /* Person.m */; };
+		F5D19F7CE04695B9E1DA2114 /* RPJSONMapper-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5D1971C897F8C539B419CB2 /* RPJSONMapper-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D191833B18728A0D0027FB59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D191831318728A0C0027FB59 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D191831A18728A0C0027FB59;
+			remoteInfo = RPJSONMapper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D191831B18728A0C0027FB59 /* RPJSONMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPJSONMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D191831E18728A0C0027FB59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D191832018728A0C0027FB59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D191832218728A0C0027FB59 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D191833618728A0D0027FB59 /* RPJSONMapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RPJSONMapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D191833718728A0D0027FB59 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D191833F18728A0D0027FB59 /* RPJSONMapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RPJSONMapperTests-Info.plist"; sourceTree = "<group>"; };
+		D191834118728A0D0027FB59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D191834318728A0D0027FB59 /* RPJSONMapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPJSONMapperTests.m; sourceTree = "<group>"; };
+		D191834F18728AD50027FB59 /* RPBoxSpecification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPBoxSpecification.h; path = RPJSONMapper/RPBoxSpecification.h; sourceTree = "<group>"; };
+		D191835018728AD50027FB59 /* RPBoxSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPBoxSpecification.m; path = RPJSONMapper/RPBoxSpecification.m; sourceTree = "<group>"; };
+		D191835118728AD50027FB59 /* RPJSONMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPJSONMapper.h; path = RPJSONMapper/RPJSONMapper.h; sourceTree = "<group>"; };
+		D191835218728AD50027FB59 /* RPJSONMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPJSONMapper.m; path = RPJSONMapper/RPJSONMapper.m; sourceTree = "<group>"; };
+		F5D1943A93FD8FE8BA688E93 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		F5D195200B6539C9FEFB9687 /* RPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPAppDelegate.h; path = RPJSONMapper/RPAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		F5D19526FA62DEA0BB31DCC8 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Car.m; path = RPJSONMapper/Car.m; sourceTree = SOURCE_ROOT; };
+		F5D1971C897F8C539B419CB2 /* RPJSONMapper-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; name = "RPJSONMapper-Info.plist"; path = "RPJSONMapper/RPJSONMapper-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F5D197C1D897226D7C6D1569 /* RPJSONMapper-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RPJSONMapper-Prefix.pch"; path = "RPJSONMapper/RPJSONMapper-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		F5D198FAAE1692FF1DD65FBB /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = Contents.json; sourceTree = "<group>"; };
+		F5D19A3C58C377AC3589A4E7 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Person.m; path = RPJSONMapper/Person.m; sourceTree = SOURCE_ROOT; };
+		F5D19A498BB5165E5B72AF7A /* RPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPAppDelegate.m; path = RPJSONMapper/RPAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		F5D19C1435E8763CD25FA130 /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Car.h; path = RPJSONMapper/Car.h; sourceTree = SOURCE_ROOT; };
+		F5D19E1B7F8D0A6CA1189AC8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RPJSONMapper/main.m; sourceTree = SOURCE_ROOT; };
+		F5D19E8219190F7E3224F867 /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = Contents.json; sourceTree = "<group>"; };
+		F5D19EB08B1730459A169C4D /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Person.h; path = RPJSONMapper/Person.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D191831818728A0C0027FB59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D191832118728A0C0027FB59 /* CoreGraphics.framework in Frameworks */,
+				D191832318728A0C0027FB59 /* UIKit.framework in Frameworks */,
+				D191831F18728A0C0027FB59 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D191833318728A0D0027FB59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D191833818728A0D0027FB59 /* XCTest.framework in Frameworks */,
+				D191833A18728A0D0027FB59 /* UIKit.framework in Frameworks */,
+				D191833918728A0D0027FB59 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D191831218728A0C0027FB59 = {
+			isa = PBXGroup;
+			children = (
+				D191834E18728ACD0027FB59 /* RPJSONMapper */,
+				D191833D18728A0D0027FB59 /* RPJSONMapperTests */,
+				D191831D18728A0C0027FB59 /* Frameworks */,
+				D191831C18728A0C0027FB59 /* Products */,
+				F5D199D094B8C5E3DD75A79A /* Supporting Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D191831C18728A0C0027FB59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D191831B18728A0C0027FB59 /* RPJSONMapper.app */,
+				D191833618728A0D0027FB59 /* RPJSONMapperTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D191831D18728A0C0027FB59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D191831E18728A0C0027FB59 /* Foundation.framework */,
+				D191832018728A0C0027FB59 /* CoreGraphics.framework */,
+				D191832218728A0C0027FB59 /* UIKit.framework */,
+				D191833718728A0D0027FB59 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D191833D18728A0D0027FB59 /* RPJSONMapperTests */ = {
+			isa = PBXGroup;
+			children = (
+				D191834318728A0D0027FB59 /* RPJSONMapperTests.m */,
+				D191833E18728A0D0027FB59 /* Supporting Files */,
+			);
+			path = RPJSONMapperTests;
+			sourceTree = "<group>";
+		};
+		D191833E18728A0D0027FB59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D191833F18728A0D0027FB59 /* RPJSONMapperTests-Info.plist */,
+				D191834018728A0D0027FB59 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D191834E18728ACD0027FB59 /* RPJSONMapper */ = {
+			isa = PBXGroup;
+			children = (
+				D191834F18728AD50027FB59 /* RPBoxSpecification.h */,
+				D191835018728AD50027FB59 /* RPBoxSpecification.m */,
+				D191835118728AD50027FB59 /* RPJSONMapper.h */,
+				D191835218728AD50027FB59 /* RPJSONMapper.m */,
+			);
+			name = RPJSONMapper;
+			sourceTree = "<group>";
+		};
+		F5D194E62BBE5D2932B816A8 /* AppIcon.appiconset */ = {
+			isa = PBXGroup;
+			children = (
+				F5D19E8219190F7E3224F867 /* Contents.json */,
+			);
+			path = AppIcon.appiconset;
+			sourceTree = "<group>";
+		};
+		F5D199D094B8C5E3DD75A79A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F5D19A498BB5165E5B72AF7A /* RPAppDelegate.m */,
+				F5D19F94BBCCAC08BC57B8A5 /* en.lproj */,
+				F5D19E1B7F8D0A6CA1189AC8 /* main.m */,
+				F5D19C1435E8763CD25FA130 /* Car.h */,
+				F5D19A3C58C377AC3589A4E7 /* Person.m */,
+				F5D195200B6539C9FEFB9687 /* RPAppDelegate.h */,
+				F5D19EB08B1730459A169C4D /* Person.h */,
+				F5D19526FA62DEA0BB31DCC8 /* Car.m */,
+				F5D197C1D897226D7C6D1569 /* RPJSONMapper-Prefix.pch */,
+				F5D1971C897F8C539B419CB2 /* RPJSONMapper-Info.plist */,
+				F5D19F4122180466ABD08C3B /* Images.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F5D19DEC31062F3D64D71D1A /* LaunchImage.launchimage */ = {
+			isa = PBXGroup;
+			children = (
+				F5D198FAAE1692FF1DD65FBB /* Contents.json */,
+			);
+			path = LaunchImage.launchimage;
+			sourceTree = "<group>";
+		};
+		F5D19F4122180466ABD08C3B /* Images.xcassets */ = {
+			isa = PBXGroup;
+			children = (
+				F5D194E62BBE5D2932B816A8 /* AppIcon.appiconset */,
+				F5D19DEC31062F3D64D71D1A /* LaunchImage.launchimage */,
+			);
+			name = Images.xcassets;
+			path = RPJSONMapper/Images.xcassets;
+			sourceTree = SOURCE_ROOT;
+		};
+		F5D19F94BBCCAC08BC57B8A5 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				F5D198F035969FE4B31D5A9B /* InfoPlist.strings */,
+			);
+			name = en.lproj;
+			path = RPJSONMapper/en.lproj;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D191831A18728A0C0027FB59 /* RPJSONMapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D191834718728A0D0027FB59 /* Build configuration list for PBXNativeTarget "RPJSONMapper" */;
+			buildPhases = (
+				D191831718728A0C0027FB59 /* Sources */,
+				D191831818728A0C0027FB59 /* Frameworks */,
+				D191831918728A0C0027FB59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RPJSONMapper;
+			productName = RPJSONMapper;
+			productReference = D191831B18728A0C0027FB59 /* RPJSONMapper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D191833518728A0D0027FB59 /* RPJSONMapperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D191834A18728A0D0027FB59 /* Build configuration list for PBXNativeTarget "RPJSONMapperTests" */;
+			buildPhases = (
+				D191833218728A0D0027FB59 /* Sources */,
+				D191833318728A0D0027FB59 /* Frameworks */,
+				D191833418728A0D0027FB59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D191833C18728A0D0027FB59 /* PBXTargetDependency */,
+			);
+			name = RPJSONMapperTests;
+			productName = RPJSONMapperTests;
+			productReference = D191833618728A0D0027FB59 /* RPJSONMapperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D191831318728A0C0027FB59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RP;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Reynaldo Gonzales";
+				TargetAttributes = {
+					D191833518728A0D0027FB59 = {
+						TestTargetID = D191831A18728A0C0027FB59;
+					};
+				};
+			};
+			buildConfigurationList = D191831618728A0C0027FB59 /* Build configuration list for PBXProject "RPJSONMapper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D191831218728A0C0027FB59;
+			productRefGroup = D191831C18728A0C0027FB59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D191831A18728A0C0027FB59 /* RPJSONMapper */,
+				D191833518728A0D0027FB59 /* RPJSONMapperTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D191831918728A0C0027FB59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5D198048357B5909E8B6DBC /* InfoPlist.strings in Resources */,
+				F5D19F7CE04695B9E1DA2114 /* RPJSONMapper-Info.plist in Resources */,
+				F5D19469D331C07BF55A5882 /* Contents.json in Resources */,
+				F5D1939F966C1DCD7B57EDC0 /* Contents.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D191833418728A0D0027FB59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D191834218728A0D0027FB59 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D191831718728A0C0027FB59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D191835418728AD50027FB59 /* RPJSONMapper.m in Sources */,
+				D191835318728AD50027FB59 /* RPBoxSpecification.m in Sources */,
+				F5D1974E68207817FECE6B81 /* RPAppDelegate.m in Sources */,
+				F5D197532695BFFF739DABBE /* main.m in Sources */,
+				F5D19C64CD9EBE6D743EB881 /* Person.m in Sources */,
+				F5D19149FC6270F59CD2AA95 /* Car.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D191833218728A0D0027FB59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D191834418728A0D0027FB59 /* RPJSONMapperTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D191833C18728A0D0027FB59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D191831A18728A0C0027FB59 /* RPJSONMapper */;
+			targetProxy = D191833B18728A0D0027FB59 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D191834018728A0D0027FB59 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D191834118728A0D0027FB59 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F5D198F035969FE4B31D5A9B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5D1943A93FD8FE8BA688E93 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D191834518728A0D0027FB59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D191834618728A0D0027FB59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D191834818728A0D0027FB59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RPJSONMapper/RPJSONMapper-Prefix.pch";
+				INFOPLIST_FILE = "RPJSONMapper/RPJSONMapper-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D191834918728A0D0027FB59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RPJSONMapper/RPJSONMapper-Prefix.pch";
+				INFOPLIST_FILE = "RPJSONMapper/RPJSONMapper-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D191834B18728A0D0027FB59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RPJSONMapper.app/RPJSONMapper";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RPJSONMapper/RPJSONMapper-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RPJSONMapperTests/RPJSONMapperTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D191834C18728A0D0027FB59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RPJSONMapper.app/RPJSONMapper";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RPJSONMapper/RPJSONMapper-Prefix.pch";
+				INFOPLIST_FILE = "RPJSONMapperTests/RPJSONMapperTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D191831618728A0C0027FB59 /* Build configuration list for PBXProject "RPJSONMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D191834518728A0D0027FB59 /* Debug */,
+				D191834618728A0D0027FB59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D191834718728A0D0027FB59 /* Build configuration list for PBXNativeTarget "RPJSONMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D191834818728A0D0027FB59 /* Debug */,
+				D191834918728A0D0027FB59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D191834A18728A0D0027FB59 /* Build configuration list for PBXNativeTarget "RPJSONMapperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D191834B18728A0D0027FB59 /* Debug */,
+				D191834C18728A0D0027FB59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D191831318728A0C0027FB59 /* Project object */;
+}
