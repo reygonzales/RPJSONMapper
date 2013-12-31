@@ -48,7 +48,9 @@ person.heightInInches = [json objectForKey:@"heightInInches"];
 person.phoneNumber = [json objectForKey:@"phoneNumber"];
 person.state = [json objectForKey:@"state"];
 person.city = [json objectForKey:@"city"];
-person.zip = [[json objectForKey:@"zip"] stringValue];
+NSNumber *zipNumber = [json objectForKey:@"zip"];
+if([zipNumber isKindOfClass:[NSNumber class]]
+        person.zip = [zipNumber stringValue];
 
 NSString *socialSecurityNumber = [json objectForKey:@"socialSecurityNumber"];
 if([socialSecurityNumber isKindOfClass:[NSString class]])
