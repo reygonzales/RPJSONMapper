@@ -10,5 +10,5 @@ typedef id (^PropertyMapperBlock)(id jsonValue);
 @property (nonatomic, copy) NSString *propertyName;
 
 + (RPBoxSpecification *)boxValueIntoPropertyWithName:(NSString *)propertyName
-                                                 usingBlock:(PropertyMapperBlock)block;
+                                          usingBlock:(PropertyMapperBlock)block;
 @end
