@@ -8,7 +8,7 @@
 // Mappings can be of the format:
 //  @{
 //      @"firstName" : @"firstName",
-//      @"age" : [RPJSONMapper boxNSNumberAsNSStringIntoPropertyWithName:@"age" fromInstance:person],
+//      @"age" : [RPJSONMapper boxValueAsNSStringIntoPropertyWithName:@"age" fromInstance:person],
 //      @"heightInInches" : @"heightInInches",
 //      ...
 //      @"languagesKnown" : @{
@@ -31,8 +31,10 @@
 
 #pragma mark - Boxing
 
-- (RPBoxSpecification *)boxNSNumberAsNSStringIntoPropertyWithName:(NSString *)propertyName;
+- (RPBoxSpecification *)boxValueAsNSStringIntoPropertyWithName:(NSString *)propertyName;
 
-- (RPBoxSpecification *)boxNSStringAsNSDateIntoPropertyWithName:(NSString *)propertyName usingDateFormat:(NSString *)dateFormat;
+- (RPBoxSpecification *)boxValueAsNSDateIntoPropertyWithName:(NSString *)propertyName usingDateFormat:(NSString *)dateFormat;
+
+- (RPBoxSpecification *)boxValueAsNSURLIntoPropertyWithName:(NSString *)propertyName;
 
 @end
