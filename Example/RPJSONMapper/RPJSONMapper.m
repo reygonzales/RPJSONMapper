@@ -1,6 +1,7 @@
 // Created by reynaldo on 12/30/13.
 
 
+#import <objc/runtime.h>
 #import "RPJSONMapper.h"
 #import "RPBoxSpecification.h"
 
@@ -56,7 +57,7 @@
         //  * RPBoxSpecification
         //      * A block wrapper that implements custom type boxing
 
-        if(jsonValue == [NSNull null])
+        if(jsonValue == [NSNull null] || jsonValue == nil)
             continue;
 
         if(mappingValue) {
@@ -154,22 +155,22 @@
     } else if([mapping isKindOfClass:[NSDictionary class]]) { // If it is a sub-mapping
         [self mapJSONValuesFrom:jsonValue toInstance:instance usingMapping:mapping];
     } else if([mapping isKindOfClass:[RPBoxSpecification class]]) {
-        [self mapJSONValue:jsonValue withBlock:mapping toInstance:instance];
+        [self mapJSONValue:jsonValue withBoxSpecification:mapping toInstance:instance];
     } else {
         [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid mapping (%@)", [mapping description]]];
     }
 }
 
 - (void)mapJSONValue:(id)jsonValue
-           withBlock:(RPBoxSpecification *)blockWrapper
+withBoxSpecification:(RPBoxSpecification *)boxSpecification
           toInstance:(id)instance {
-    PropertyMapperBlock block = blockWrapper.block;
+    PropertyMapperBlock block = boxSpecification.block;
 
-    if(blockWrapper.propertyName.length && blockWrapper.block) {
+    if(boxSpecification.propertyName.length && boxSpecification.block) {
         id userDefinedValue = block(jsonValue);
-        [self mapJSONValue:userDefinedValue toKey:blockWrapper.propertyName forInstance:instance];
+        [self mapJSONValue:userDefinedValue toKey:boxSpecification.propertyName forInstance:instance];
     } else {
-        [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid RPBoxSpecification (%@)", [blockWrapper description]]];
+        [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid RPBoxSpecification (%@)", [boxSpecification description]]];
     }
 }
 
@@ -180,10 +181,123 @@
     SEL setSelector = NSSelectorFromString(setSelectorString);
 
     if([instance respondsToSelector:setSelector]) {
-        [instance setValue:value forKey:key];
+        if([self isValidValue:value forPropertyWithName:key forInstance:instance]) {
+            [instance setValue:value forKey:key];
+        } else if([self hasBoxMethodForPropertyName:key forInstance:instance selector:&setSelector]) {
+            [self attemptAutoBoxForPropertyWithName:key withValue:value forInstance:instance usingSelector:setSelector];
+        } else {
+            [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: No auto boxing methods found for instance (%@), value (%@), and key (%@)", [[instance class] description], value, key]];
+        }
     } else {
         [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Instance (%@) does not respond to selector (%@)", [[instance class] description], setSelectorString]];
     }
+}
+
+- (BOOL)isValidValue:(id)value
+ forPropertyWithName:(NSString *)key
+         forInstance:(id)instance {
+    NSString *propertyType = [self propertyTypeGivenPropertyAttributes:[NSString stringWithUTF8String:property_getAttributes(class_getProperty([instance class], [key UTF8String]))]];
+    return ([value isKindOfClass:NSClassFromString(propertyType)]);
+}
+
+#pragma mark - Private Auto Boxing Methods
+
+- (void)attemptAutoBoxForPropertyWithName:(NSString *)propertyName
+                                withValue:(id)value
+                              forInstance:(id)instance
+                            usingSelector:(SEL)setSelector {
+    RPBoxSpecification *boxSpecification = [self performSelector:setSelector withObject:propertyName];
+    id userDefinedValue = boxSpecification.block(value);
+
+    if(![self isValidValue:userDefinedValue forPropertyWithName:propertyName forInstance:instance]) {
+        [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Attempted to auto box and failed for instance (%@), value (%@), and key (%@)", [[instance class] description], value, propertyName]];
+    } else {
+        [self log:[NSString stringWithFormat:@"RPJSONMapper: Auto boxing value (%@) for key (%@) on instance (%@)", value, propertyName, [[instance class] description]]];
+        [instance setValue:userDefinedValue forKey:propertyName];
+    }
+}
+
+- (BOOL)hasBoxMethodForPropertyName:(NSString *)propertyName
+                        forInstance:(id)instance
+                           selector:(SEL *)selector {
+    NSString *propertyAttributes = [NSString stringWithUTF8String:property_getAttributes(class_getProperty([instance class], [propertyName UTF8String]))];
+    NSString *propertyType = [self propertyTypeGivenPropertyAttributes:propertyAttributes];
+    NSString *selectorString = [NSString stringWithFormat:@"boxValueAs%@IntoPropertyWithName:", propertyType];
+    *selector = NSSelectorFromString(selectorString);
+    if([self respondsToSelector:*selector])
+        return YES;
+    return NO;
+}
+
+- (NSString *)propertyTypeGivenPropertyAttributes:(NSString *)propertyAttributes {
+    // See https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html#//apple_ref/doc/uid/TP40008048-CH101-SW5 for types
+    NSString *secondCharacter = [propertyAttributes substringWithRange:NSMakeRange(1, 1)];
+    if([secondCharacter isEqualToString:@"c"]) return @"char";
+    else if([secondCharacter isEqualToString:@"d"]) return @"double";
+    else if([secondCharacter isEqualToString:@"i"]) return @"int";
+    else if([secondCharacter isEqualToString:@"f"]) return @"float";
+    else if([secondCharacter isEqualToString:@"l"]) return @"long";
+    else if([secondCharacter isEqualToString:@"s"]) return @"short";
+    else if([secondCharacter isEqualToString:@"I"]) return @"unsigned";
+    else if([secondCharacter isEqualToString:@"{"]) {
+        unsigned int length = [propertyAttributes length] - 2;
+        unichar buffer[length + 1];
+        char structName[length];
+        [propertyAttributes getCharacters:buffer range:NSMakeRange(1, length - 2)];
+        for(NSInteger i = 0; i < length; ++i) {
+            unichar currentCharacter = buffer[i];
+            if(currentCharacter != '=') {
+                structName[i] = (char) currentCharacter;
+            } else {
+                structName[i] = '\0';
+                break;
+            }
+        }
+        return [NSString stringWithCString:structName encoding:NSUTF8StringEncoding];
+    }
+    else if([secondCharacter isEqualToString:@"("]) {
+        unsigned int length = [propertyAttributes length] - 2;
+        unichar buffer[length + 1];
+        char unionName[length];
+        [propertyAttributes getCharacters:buffer range:NSMakeRange(1, length - 2)];
+        for(NSInteger i = 0; i < length; ++i) {
+            unichar currentCharacter = buffer[i];
+            if(currentCharacter != '=') {
+                unionName[i] = (char) currentCharacter;
+            } else {
+                unionName[i] = '\0';
+                break;
+            }
+        }
+        return [NSString stringWithCString:unionName encoding:NSUTF8StringEncoding];
+    }
+    else if([secondCharacter isEqualToString:@"@"]) {
+        NSString *thirdCharacter = [propertyAttributes substringWithRange:NSMakeRange(2, 1)];
+        if([thirdCharacter isEqualToString:@","])
+            return @"id";
+
+        unsigned int length = [propertyAttributes length] - 3;
+        unichar buffer[length + 1];
+        char objectName[length];
+        [propertyAttributes getCharacters:buffer range:NSMakeRange(3, length)];
+        for(NSInteger i = 0; i < length; ++i) {
+            unichar currentCharacter = buffer[i];
+            if(currentCharacter != '"') {
+                objectName[i] = (char) currentCharacter;
+            } else {
+                objectName[i] = '\0';
+                break;
+            }
+        }
+
+        NSString *propertyName = [NSString stringWithCString:objectName encoding:NSUTF8StringEncoding];
+
+        return propertyName;
+    } else {
+        [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Could not find type when attempting to auto box for property with attributes (%@)", propertyAttributes]];
+        return @"";
+    }
+    // Note: I (Rey) am not sure if I should add functionality for autoboxing pointers
 }
 
 @end
