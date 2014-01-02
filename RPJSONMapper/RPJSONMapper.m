@@ -74,6 +74,10 @@
                                                  usingBlock:^id(id jsonValue) {
                                                      if([jsonValue isKindOfClass:[NSNumber class]])
                                                          return [((NSNumber *) jsonValue) stringValue];
+                                                     else if([jsonValue isKindOfClass:[NSString class]]) {
+                                                         [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Unnecessary boxing call for property (%@) with value (%@)", propertyName, jsonValue]];
+                                                         return jsonValue;
+                                                     }
                                                      return @"";
                                                  }];
 }
