@@ -82,6 +82,19 @@
                                                  }];
 }
 
+- (RPBoxSpecification *)boxValueAsNSNumberIntoPropertyWithName:(NSString *)propertyName {
+    return [RPBoxSpecification boxValueIntoPropertyWithName:propertyName
+                                                 usingBlock:^id(id jsonValue) {
+                                                     if([jsonValue isKindOfClass:[NSString class]])
+                                                         return [NSNumber numberWithInteger:[((NSString *) jsonValue) integerValue]];
+                                                     else if([jsonValue isKindOfClass:[NSNumber class]]) {
+                                                         [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Unnecessary boxing call for property (%@) with value (%@)", propertyName, jsonValue]];
+                                                         return jsonValue;
+                                                     }
+                                                     return @0;
+                                                 }];
+}
+
 - (RPBoxSpecification *)boxValueAsNSDateIntoPropertyWithName:(NSString *)propertyName
                                              usingDateFormat:(NSString *)dateFormat {
     __block __weak RPJSONMapper *blockSafeSelf = self;

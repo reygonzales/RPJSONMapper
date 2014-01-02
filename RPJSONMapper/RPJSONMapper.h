@@ -19,6 +19,8 @@
 
 - (RPBoxSpecification *)boxValueAsNSStringIntoPropertyWithName:(NSString *)propertyName;
 
+- (RPBoxSpecification *)boxValueAsNSNumberIntoPropertyWithName:(NSString *)propertyName;
+
 - (RPBoxSpecification *)boxValueAsNSDateIntoPropertyWithName:(NSString *)propertyName usingDateFormat:(NSString *)dateFormat;
 
 - (RPBoxSpecification *)boxValueAsNSURLIntoPropertyWithName:(NSString *)propertyName;
