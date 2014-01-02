@@ -5,20 +5,6 @@
 
 @class RPBoxSpecification;
 
-// Mappings can be of the format:
-//  @{
-//      @"firstName" : @"firstName",
-//      @"age" : [RPJSONMapper boxValueAsNSStringIntoPropertyWithName:@"age" fromInstance:person],
-//      @"heightInInches" : @"heightInInches",
-//      ...
-//      @"languagesKnown" : @{
-//          @0 : @"languageKnown"
-//      },
-//      @"car" : [RPBoxSpecification boxValueIntoPropertyWithName:@"floorPlanImages" usingBlock:^id(id jsonValue) {...}]
-//  }
-
-// Instances must be KVC compliant
-
 @interface RPJSONMapper : NSObject
 
 @property (nonatomic) BOOL shouldSuppressWarnings;
