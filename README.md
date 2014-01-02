@@ -95,13 +95,13 @@ How it works
 ------------
 
 ```
-For all keys in the mapping dictionary
+For each key in the mapping dictionary
         1. Get the JSON value in the JSON dictionary
         2. If the JSON value is not [NSNull null]
                 i. Get the mapping value in the mapping dictionary
-                        a. If the mapping value is an NSString, generate a setter and call it with the JSON value
-                        b. If the mapping value is an NSDictionary, iterate it as a submapping
-                        c. If the mapping value is an RPBoxSpecification, generate a setter and call it with the returned value from the corresponding block and JSON value
+                ii. If the mapping value is an NSString, generate a setter and call it with the JSON value
+                iii. If the mapping value is an NSDictionary, iterate it as a submapping
+                iv. If the mapping value is an RPBoxSpecification, generate a setter and call it with the returned value from the corresponding block and JSON value
 ```
 Why
 ---
