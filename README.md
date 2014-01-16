@@ -140,7 +140,7 @@ StrengthLog *log = [StrengthLog new];
 NSDateFormatters take a long time to instantiate and thus we want to be careful with how many we have
 
 ## Requirements ##
-* ARC
+* [ARC](http://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 * Objects must be [KVC Compliant](https://developer.apple.com/library/ios/documentation/cocoa/conceptual/KeyValueCoding/Articles/Compliant.html#//apple_ref/doc/uid/20002172-BAJEAIEE)
 
 ## Install ##
