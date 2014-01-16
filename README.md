@@ -130,7 +130,7 @@ NSDictionary *json = @{
 
 StrengthLog *log = [StrengthLog new];
 [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:log usingMapping:@{
-        @"bench" : @"bench", // Forgot to put boxValueAsNSStringIntoPropertyWithName:?
+        @"bench" : @"bench", // Forgot to put boxValueAsNSNumberIntoPropertyWithName:?
         @"squat" : @"squat", // Don't worry!
         @"deadlift" : @"deadlift" // It's done automatically!
 }];
