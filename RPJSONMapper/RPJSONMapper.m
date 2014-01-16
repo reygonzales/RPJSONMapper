@@ -206,7 +206,11 @@ withBoxSpecification:(RPBoxSpecification *)boxSpecification
                                 withValue:(id)value
                               forInstance:(id)instance
                             usingSelector:(SEL)setSelector {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     RPBoxSpecification *boxSpecification = [self performSelector:setSelector withObject:propertyName];
+#pragma clang diagnostic pop
+
     id userDefinedValue = boxSpecification.block(value);
 
     if(![self isValidValue:userDefinedValue forPropertyWithName:propertyName forInstance:instance]) {
