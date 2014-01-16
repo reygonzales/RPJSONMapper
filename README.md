@@ -97,12 +97,55 @@ Another key-value pair is `@"zip" : [[RPJSONMapper sharedInstance] boxValueAsNSS
 
 The second type of boxing is for NSDates and is demonstrated with the key-value pair `@"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"]`. This, just like the other two key-value pairs, takes the value of `"birthDate"` from the JSON dictionary (@"11-08-1988"), gets the NSDate value of it using the date format (@"MM-dd-yyyy") and then sets it into `@property (nonatomic, strong) NSDate *birthDate`. The underlying NSDateFormatter is an instance variable of the RPJSONMapper and is accessed only in a @synchronized call (so it is multi-threaded safe).
 
-Why
----
-* Less to type and easier to read
-* Automatic handling for [NSNull null] values
-* One multi-threaded safe NSDateFormatter per sharedInstance
-  * NSDateFormatters take a long time to instantiate and thus we want to be careful with how many we have
+But Wait, There's More!
+-----------------------
+### Automatic handling for [NSNull null] values
+```Objective-C
+@interface PowerPack : NSObject
+@property (nonatomic, copy) NSString *supercharger;
+@property (nonatomic, copy) NSString *turbocharger;
+@end
+
+...
+
+NSDictionary *json = @{
+        @"supercharger" : [NSNull null],
+        @"turbocharger" : [NSNull null]
+};
+
+PowerPack *mustangPowerPack = [PowerPack new];
+[[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:mustangPowerPack usingMapping:@{
+        @"supercharger" : @"supercharger", // No need to wrap setObject:forKey: calls with if statements anymore!
+        @"turbocharger" : @"turbocharger"
+}];
+```
+
+### Automatic boxing
+```Objective-C
+@interface Developer : NSObject
+@property (nonatomic, strong) NSNumber *bench;
+@property (nonatomic, strong) NSNumber *squat;
+@property (nonatomic, strong) NSNumber *deadlift;
+@end
+
+...
+
+NSDictionary *json = @{
+        @"bench" : @"225",
+        @"squat" : @"315",
+        @"deadlift" : @"405"
+};
+
+StrengthLog *log = [StrengthLog new];
+[[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:log usingMapping:@{
+        @"bench" : @"bench", // Forgot to put boxValueAsNSStringIntoPropertyWithName:?
+        @"squat" : @"squat", // Don't worry!
+        @"deadlift" : @"deadlift" // It's done automatically!
+}];
+```
+
+### One multi-threaded safe NSDateFormatter per sharedInstance
+NSDateFormatters take a long time to instantiate and thus we want to be careful with how many we have
 
 Requirements
 ------------
