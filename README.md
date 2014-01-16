@@ -1,8 +1,4 @@
-RPJSONMapper
-============
-
-Given
------
+## Given ##
 ```Objective-C
 @interface Person : NSObject
 @property (nonatomic, copy) NSString *givenName;
@@ -36,8 +32,7 @@ NSDictionary *json = @{
 };
 ```
 
-Before
-------
+## Before ##
 ```Objective-C
 Person *person = [Person new];
 person.givenName = [json objectForKey:@"firstName"];
@@ -70,8 +65,7 @@ if([startDateString isKindOfClass:[NSString class]]) {
 }
 ```
 
-After
------
+## After ##
 ```Objective-C
 Person *person = [Person new];
 [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:person usingMapping:@{
@@ -89,17 +83,15 @@ Person *person = [Person new];
 }];
 ```
 
-Explanation
------------
+## Explanation ##
 The first key-value pair in the mapping dictionary is `@"firstName" : @"givenName"`. This mapping sets the value of `"firstName"` from the JSON dictionary (@"John") into `@property (nonatomic, copy) NSString *givenName` for `person`.
 
 Another key-value pair is `@"zip" : [[RPJSONMapper sharedInstance] boxValueAsNSStringIntoPropertyWithName:@"zip"]`. This mapping retrieves the value of `"zip"` from the JSON dictionary (@94015), gets the string value of it (@"94015") and then sets it into `@property (nonatomic, copy) NSString *zip` for `person`. We box the value as an NSString because we cannot store an NSNumber into an NSString.
 
 The second type of boxing is for NSDates and is demonstrated with the key-value pair `@"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"]`. This, just like the other two key-value pairs, takes the value of `"birthDate"` from the JSON dictionary (@"11-08-1988"), gets the NSDate value of it using the date format (@"MM-dd-yyyy") and then sets it into `@property (nonatomic, strong) NSDate *birthDate`. The underlying NSDateFormatter is an instance variable of the RPJSONMapper and is accessed only in a @synchronized call (so it is multi-threaded safe).
 
-But Wait, There's More!
------------------------
-### Automatic handling for [NSNull null] values
+## But Wait, There's More! ##
+### Automatic handling for [NSNull null] values ###
 ```Objective-C
 @interface PowerPack : NSObject
 @property (nonatomic, copy) NSString *supercharger;
@@ -120,7 +112,7 @@ PowerPack *mustangPowerPack = [PowerPack new];
 }];
 ```
 
-### Automatic boxing
+### Automatic boxing ###
 ```Objective-C
 @interface Developer : NSObject
 @property (nonatomic, strong) NSNumber *bench;
@@ -144,17 +136,15 @@ StrengthLog *log = [StrengthLog new];
 }];
 ```
 
-### One multi-threaded safe NSDateFormatter per sharedInstance
+### One multi-threaded safe NSDateFormatter per sharedInstance ###
 NSDateFormatters take a long time to instantiate and thus we want to be careful with how many we have
 
-Requirements
-------------
+## Requirements ##
 * ARC
-* Objects must be KVC Compliant (https://developer.apple.com/library/ios/documentation/cocoa/conceptual/KeyValueCoding/Articles/Compliant.html#//apple_ref/doc/uid/20002172-BAJEAIEE)
+* Objects must be [KVC Compliant](https://developer.apple.com/library/ios/documentation/cocoa/conceptual/KeyValueCoding/Articles/Compliant.html#//apple_ref/doc/uid/20002172-BAJEAIEE)
 
-Install
--------
-* Use CocoaPods
+## Install ##
+* Use [CocoaPods](http://cocoapods.org)
 
 Or
 
