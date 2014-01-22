@@ -7,6 +7,7 @@
 
 @interface RPJSONMapper()
 @property (atomic, strong) NSDateFormatter *dateFormatter;
+@property (atomic, strong) NSNumberFormatter *numberFormatter;
 @end
 
 @implementation RPJSONMapper
@@ -22,6 +23,7 @@
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
         sharedInstance.dateFormatter = [[NSDateFormatter alloc] init];
+        sharedInstance.numberFormatter = [[NSNumberFormatter alloc] init];
         sharedInstance.shouldSuppressWarnings = NO;
     });
 
@@ -84,11 +86,20 @@
 }
 
 - (RPBoxSpecification *)boxValueAsNSNumberIntoPropertyWithName:(NSString *)propertyName {
+    __block __weak RPJSONMapper *blockSafeSelf = self;
+
     return [RPBoxSpecification boxValueIntoPropertyWithName:propertyName
                                                  usingBlock:^id(id jsonValue) {
-                                                     if([jsonValue isKindOfClass:[NSString class]])
-                                                         return [NSNumber numberWithInteger:[((NSString *) jsonValue) integerValue]];
-                                                     else if([jsonValue isKindOfClass:[NSNumber class]]) {
+                                                     if([jsonValue isKindOfClass:[NSString class]]) {
+                                                         NSNumber *number;
+
+                                                         @synchronized (blockSafeSelf.numberFormatter) {
+                                                             [blockSafeSelf.numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+                                                             number = [blockSafeSelf.numberFormatter numberFromString:jsonValue];
+                                                         }
+
+                                                         return number;
+                                                     } else if([jsonValue isKindOfClass:[NSNumber class]]) {
                                                          [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Unnecessary boxing call for property (%@) with value (%@)", propertyName, jsonValue]];
                                                          return jsonValue;
                                                      }
