@@ -138,19 +138,7 @@ StrengthLog *log = [StrengthLog new];
 
 ### JSON Array Parsing ###
 ```Objective-C
-NSDictionary *json = @{
-     @"firstName" : @"John",
-     @"lastName" : [NSNull null],
-     @"age" : @25,
-     @"heightInInches" : @68.5,
-     @"phoneNumber" : @"415-555-1234",
-     @"state" : @"California",
-     @"city" : @"Daly City",
-     @"zip" : @94015,
-     @"socialSecurityNumber" : [NSNull null],
-     @"birthDate" : @"11-08-1988",
-     @"startDate" : @"Nov 05 2012"
-};
+NSDictionary *json = @{...};
 
 NSArray *jsonArray = @[json, json, json];
 
