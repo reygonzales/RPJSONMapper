@@ -5,6 +5,8 @@
 
 @class RPBoxSpecification;
 
+typedef id (^InstantiationBlock)();
+
 @interface RPJSONMapper : NSObject
 
 @property (nonatomic) BOOL shouldSuppressWarnings;
@@ -14,6 +16,10 @@
 - (void)mapJSONValuesFrom:(id)json
                toInstance:(id)instance
              usingMapping:(NSDictionary *)mapping;
+
+- (NSArray *)objectsFromJSONArray:(id)json
+           withInstantiationBlock:(InstantiationBlock)instantiationBlock
+                       andMapping:(NSDictionary *)mapping;
 
 #pragma mark - Boxing
 

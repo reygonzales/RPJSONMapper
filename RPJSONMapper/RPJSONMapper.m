@@ -70,6 +70,32 @@
     }
 }
 
+- (NSArray *)objectsFromJSONArray:(id)json
+           withInstantiationBlock:(InstantiationBlock)instantiationBlock
+                       andMapping:(NSDictionary *)mapping {
+    if([json isKindOfClass:[NSArray class]]) {
+        NSMutableArray *objects = [NSMutableArray array];
+
+        for(id subJSON in json) {
+            id object = instantiationBlock();
+
+            if(!object) {
+                [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Instantiation block did not return instance for json (%@) and mapping (%@)", json, [mapping description]]];
+            } else {
+                [self mapJSONValuesFrom:subJSON
+                             toInstance:object
+                           usingMapping:mapping];
+                [objects addObject:object];
+            }
+        }
+
+        return objects;
+    } else {
+        [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Invalid JSON for objectsFromJSONArray:withInstantiationBlock:andMapping:. JSON must be an array for json (%@) and mapping (%@)", json, [mapping description]]];
+        return nil;
+    }
+}
+
 #pragma mark - Boxing
 
 - (RPBoxSpecification *)boxValueAsNSStringIntoPropertyWithName:(NSString *)propertyName {

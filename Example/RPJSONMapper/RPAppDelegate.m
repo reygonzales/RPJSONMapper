@@ -51,6 +51,25 @@
             @"startDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"startDate" usingDateFormat:@"MMM dd yyyy"]
     }];
 
+    NSArray *jsonArray = @[json, json, json];
+
+    NSArray *jsonObjects = [[RPJSONMapper sharedInstance] objectsFromJSONArray:jsonArray
+                                                        withInstantiationBlock:^id {
+                                                            return [Person new];
+                                                        } andMapping:@{
+                    @"firstName" : @"firstName",
+                    @"lastName" : @"lastName",
+                    @"age" : @"age",
+                    @"heightInInches" : @"heightInInches",
+                    @"phoneNumber" : @"phoneNumber",
+                    @"state" : @"state",
+                    @"city" : @"city",
+                    @"zip" : [[RPJSONMapper sharedInstance] boxValueAsNSStringIntoPropertyWithName:@"zip"],
+                    @"socialSecurityNumber" : @"socialSecurityNumber",
+                    @"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"],
+                    @"startDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"startDate" usingDateFormat:@"MMM dd yyyy"]
+            }];
+
     return YES;
 }
 
