@@ -56,7 +56,8 @@
     NSArray *jsonObjects = [[RPJSONMapper sharedInstance] objectsFromJSONArray:jsonArray
                                                         withInstantiationBlock:^id {
                                                             return [Person new];
-                                                        } andMapping:@{
+                                                        }
+                                                                  usingMapping:@{
                     @"firstName" : @"firstName",
                     @"lastName" : @"lastName",
                     @"age" : @"age",
@@ -69,6 +70,36 @@
                     @"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"],
                     @"startDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"startDate" usingDateFormat:@"MMM dd yyyy"]
             }];
+
+    NSDictionary *largeJSON = @{
+            @"Animals" : @[
+                    @{
+                        @"Dog" : @{}
+                    },
+                    @{
+                        @"Cat" : @{
+                            @"Babies" : @[
+                                    @{},
+                                    @{
+                                        @"Runt" : @{
+                                                @"Name" : @"Bobby",
+                                                @"Age" : @"Kitten"
+                                        }
+                                    }
+                                ]
+                        }
+                    },
+                    @{
+                        @"Bird" : @{}
+                    }
+            ]
+    };
+
+    NSDictionary *childJSON = [[RPJSONMapper sharedInstance] childJSONInJSON:largeJSON usingPath:@[@"Animals", @1, @"Cat", @"Babies", @1]];
+    // childJSON = @"Runt" : @{
+    //    @"Name" : @"Bobby",
+    //    @"Age" : @"Kitten"
+    // }
 
     return YES;
 }

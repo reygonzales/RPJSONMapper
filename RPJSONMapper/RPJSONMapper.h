@@ -19,7 +19,10 @@ typedef id (^InstantiationBlock)();
 
 - (NSArray *)objectsFromJSONArray:(id)json
            withInstantiationBlock:(InstantiationBlock)instantiationBlock
-                       andMapping:(NSDictionary *)mapping;
+                     usingMapping:(NSDictionary *)mapping;
+
+- (id)childJSONInJSON:(id)json
+            usingPath:(NSArray *)path;
 
 #pragma mark - Boxing
 

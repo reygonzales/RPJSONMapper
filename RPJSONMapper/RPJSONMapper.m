@@ -72,7 +72,7 @@
 
 - (NSArray *)objectsFromJSONArray:(id)json
            withInstantiationBlock:(InstantiationBlock)instantiationBlock
-                       andMapping:(NSDictionary *)mapping {
+                     usingMapping:(NSDictionary *)mapping {
     if([json isKindOfClass:[NSArray class]]) {
         NSMutableArray *objects = [NSMutableArray array];
 
@@ -91,9 +91,46 @@
 
         return objects;
     } else {
-        [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Invalid JSON for objectsFromJSONArray:withInstantiationBlock:andMapping:. JSON must be an array for json (%@) and mapping (%@)", json, [mapping description]]];
+        [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Invalid JSON for objectsFromJSONArray:withInstantiationBlock:usingMapping:. JSON must be an array for json (%@) and mapping (%@)", json, [mapping description]]];
         return nil;
     }
+}
+
+
+- (id)childJSONInJSON:(id)json
+            usingPath:(NSArray *)path {
+    id childJSON = json;
+
+    for(id pathObject in path) {
+        if([pathObject isKindOfClass:[NSString class]]) {
+            if([childJSON isKindOfClass:[NSDictionary class]]) {
+                if([childJSON objectForKey:pathObject]) {
+                    childJSON = [childJSON objectForKey:pathObject];
+                } else {
+                    [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid path object (%@) for json (%@) and path (%@), value not found for key", pathObject, json, path]];
+                    return nil;
+                }
+            } else {
+                [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid path object (%@) for json (%@) and path (%@), child JSON not a dictionary", pathObject, json, path]];
+                return nil;
+            }
+        } else if([pathObject isKindOfClass:[NSNumber class]]) {
+            if([childJSON isKindOfClass:[NSArray class]]) {
+                if([childJSON count] > [pathObject unsignedIntegerValue]) {
+                    childJSON = [childJSON objectAtIndex:[pathObject unsignedIntegerValue]];
+                } else {
+                    [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid path object (%@) for json (%@) and path (%@), index out of bounds", pathObject, json, path]];
+                }
+            } else {
+                [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid path object (%@) for json (%@) and path (%@), child JSON not an array", pathObject, json, path]];
+                return nil;
+            }
+        } else {
+            [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Invalid path object (%@) for json (%@) and path (%@)", pathObject, json, path]];
+            return nil;
+        }
+    }
+    return childJSON;
 }
 
 #pragma mark - Boxing
