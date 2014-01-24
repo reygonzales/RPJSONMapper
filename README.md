@@ -136,6 +136,71 @@ StrengthLog *log = [StrengthLog new];
 }];
 ```
 
+### JSON Array Parsing ###
+```Objective-C
+NSDictionary *json = @{...};
+
+NSArray *jsonArray = @[json, json, json];
+
+// Before
+NSMutableArray *people = [NSMutableArray array];
+if([jsonArray isKindOfClass:[NSArray class]]) {
+     for(NSDictionary *subJSON in jsonArray) {
+          Person *person = [Person new];
+          [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:person usingMapping:@{...}];
+          [people addObject:person];
+     }
+}
+
+// After
+people = [[RPJSONMapper sharedInstance] objectsFromJSONArray:jsonArray withInstantiationBlock:^id { return [Person new];} usingMapping:@{...}];
+```
+
+### Child JSON Paths ###
+```Objective-C
+NSDictionary *largeJSON = @{
+            @"Animals" : @[
+                    @{
+                        @"Dog" : @{}
+                    },
+                    @{
+                        @"Cat" : @{
+                            @"Babies" : @[
+                                    @{},
+                                    @{
+                                        @"Runt" : @{
+                                                @"Name" : @"Bobby",
+                                                @"Age" : @"Kitten"
+                                        }
+                                    }
+                                ]
+                        }
+                    },
+                    @{
+                        @"Bird" : @{}
+                    }
+            ]
+    };
+
+// Before
+id childJSON = [largeJSON objectForKey:@"Animals"];
+if([childJSON isKindOfClass:[NSArray class]] && [childJSON count] > 1) {
+    childJSON = [childJSON objectAtIndex:1];
+    if([childJSON isKindOfClass:[NSDictionary class]] && [childJSON objectForKey:@"Cat"]) {
+        childJSON = [childJSON objectForKey:@"Cat"];
+        if([childJSON isKindOfClass:[NSDictionary class]] && [childJSON objectForKey:@"Babies"]) {
+            childJSON = [childJSON objectForKey:@"Babies"];
+            if([childJSON isKindOfClass:[NSArray class]] && [childJSON count] > 1) {
+                childJSON = [childJSON objectAtIndex:1];
+            }
+        }
+    }
+}
+
+// After
+childJSON = [[RPJSONMapper sharedInstance] childJSONInJSON:largeJSON usingPath:@[@"Animals", @1, @"Cat", @"Babies", @1]];
+```
+
 ### One multi-threaded safe NSDateFormatter per sharedInstance ###
 NSDateFormatters take a long time to instantiate and thus we want to be careful with how many we have
 
