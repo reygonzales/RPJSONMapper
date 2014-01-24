@@ -25,7 +25,7 @@
     NSDictionary *json = @{
             @"firstName" : @"John",
             @"lastName" : [NSNull null],
-            @"age" : @25,
+            @"age" : @"",
             @"heightInInches" : @68.5,
             @"phoneNumber" : @"415-555-1234",
             @"state" : @"California",

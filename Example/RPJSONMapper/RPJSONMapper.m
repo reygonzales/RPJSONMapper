@@ -161,6 +161,11 @@
                                                              number = [blockSafeSelf.numberFormatter numberFromString:jsonValue];
                                                          }
 
+                                                         if(!number) {
+                                                             [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Failed convert value (%@) to NSNumber for property (%@), boxing as @0 instead", jsonValue, propertyName]];
+                                                             return @0;
+                                                         }
+
                                                          return number;
                                                      } else if([jsonValue isKindOfClass:[NSNumber class]]) {
                                                          [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: Unnecessary boxing call for property (%@) with value (%@)", propertyName, jsonValue]];
