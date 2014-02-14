@@ -259,7 +259,7 @@ withBoxSpecification:(RPBoxSpecification *)boxSpecification
     NSString *setSelectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];
     SEL setSelector = NSSelectorFromString(setSelectorString);
 
-    if([instance respondsToSelector:setSelector]) {
+    if([instance respondsToSelector:setSelector] && [self instance:instance hasPropertyWithName:key]) {
         if([self isValidValue:value forPropertyWithName:key forInstance:instance]) {
             [instance setValue:value forKey:key];
         } else if([self hasBoxMethodForPropertyName:key forInstance:instance selector:&setSelector]) {
@@ -268,7 +268,10 @@ withBoxSpecification:(RPBoxSpecification *)boxSpecification
             [self log:[NSString stringWithFormat:@"RPJSONMapper Warning: No auto boxing methods found for instance (%@), value (%@), and key (%@)", [[instance class] description], value, key]];
         }
     } else {
-        [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Instance (%@) does not respond to selector (%@)", [[instance class] description], setSelectorString]];
+        if(![instance respondsToSelector:setSelector])
+            [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Instance (%@) does not respond to selector (%@)", [[instance class] description], setSelectorString]];
+        else
+            [self log:[NSString stringWithFormat:@"RPJSONMapper Error: Instance (%@) does not have property (%@)", [[instance class] description], key]];
     }
 }
 
@@ -277,6 +280,12 @@ withBoxSpecification:(RPBoxSpecification *)boxSpecification
          forInstance:(id)instance {
     NSString *propertyType = [self propertyTypeGivenPropertyAttributes:[NSString stringWithUTF8String:property_getAttributes(class_getProperty([instance class], [key UTF8String]))]];
     return ([value isKindOfClass:NSClassFromString(propertyType)]);
+}
+
+- (BOOL)instance:(id)instance hasPropertyWithName:(NSString *)key {
+    objc_property_t objcProperty = class_getProperty([instance class], [key UTF8String]);
+    if(!objcProperty) return NO;
+    return YES;
 }
 
 #pragma mark - Private Auto Boxing Methods

@@ -38,7 +38,7 @@
 
     Person *person = [Person new];
     [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:person usingMapping:@{
-            @"firstName" : @"firstName",
+            @"firstName" : @"FirstName",
             @"lastName" : @"lastName",
             @"age" : @"age",
             @"heightInInches" : @"heightInInches",
