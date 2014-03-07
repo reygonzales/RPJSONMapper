@@ -120,16 +120,20 @@ WeatherReport *firstReportOfYear = [WeatherReport new];
 WeatherReport *secondReportOfYear = [WeatherReport new];
 
 [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:firstReportOfYear usingMapping:@{
-        @0 : @{ // Get the first element (index: 0) of the array
-                @"description" : @"weatherDescription",
-                @"temperature" : @"temperature"
+        @"JanuaryWeatherReport" : @{
+                @0 : @{ // Get the first element (index: 0) of the array
+                        @"description" : @"weatherDescription",
+                        @"temperature" : @"temperature"
+                }
         }
 };
 
 [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:secondReportOfYear usingMapping:@{
-        @1 : @{ // Get the second element (index: 1) of the array
-                @"description" : @"weatherDescription",
-                @"temperature" : @"temperature"
+        @"JanuaryWeatherReport" : @{
+                @1 : @{ // Get the second element (index: 1) of the array
+                        @"description" : @"weatherDescription",
+                        @"temperature" : @"temperature"
+                }
         }
 };
 ```
