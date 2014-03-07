@@ -91,6 +91,49 @@ Another key-value pair is `@"zip" : [[RPJSONMapper sharedInstance] boxValueAsNSS
 The second type of boxing is for NSDates and is demonstrated with the key-value pair `@"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"]`. This, just like the other two key-value pairs, takes the value of `"birthDate"` from the JSON dictionary (@"11-08-1988"), gets the NSDate value of it using the date format (@"MM-dd-yyyy") and then sets it into `@property (nonatomic, strong) NSDate *birthDate`. The underlying NSDateFormatter is an instance variable of the RPJSONMapper and is accessed only in a @synchronized call (so it is multi-threaded safe).
 
 ## But Wait, There's More! ##
+### Array mapping ###
+```Objective-C
+@interface WeatherReport : NSObject
+@property (nonatomic, copy) NSString *weatherDescription;
+@property (nonatomic, copy) NSNumber *temperature;
+@end
+
+...
+
+NSDictionary *json = @{
+        @"JanuaryWeatherReport" : @[
+                @{
+                        @"description" : @"Sunny with a chance of storms",
+                        @"temperature" : @98.1
+                },
+                @{
+                        @"description" : @"Hailing and fog",
+                        @"temperature" : @70.2
+                },
+                ...
+        ],
+        @"FebruaryWeatherReport" : @[...],
+        ...
+};
+
+WeatherReport *firstReportOfYear = [WeatherReport new];
+WeatherReport *secondReportOfYear = [WeatherReport new];
+
+[[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:firstReportOfYear usingMapping:@{
+        @0 : @{ // Get the first element (index: 0) of the array
+                @"description" : @"weatherDescription",
+                @"temperature" : @"temperature"
+        }
+};
+
+[[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:secondReportOfYear usingMapping:@{
+        @1 : @{ // Get the second element (index: 1) of the array
+                @"description" : @"weatherDescription",
+                @"temperature" : @"temperature"
+        }
+};
+```
+
 ### Automatic handling for [NSNull null] values ###
 ```Objective-C
 @interface PowerPack : NSObject
@@ -114,7 +157,7 @@ PowerPack *mustangPowerPack = [PowerPack new];
 
 ### Automatic boxing ###
 ```Objective-C
-@interface Developer : NSObject
+@interface PowerLifter : NSObject
 @property (nonatomic, strong) NSNumber *bench;
 @property (nonatomic, strong) NSNumber *squat;
 @property (nonatomic, strong) NSNumber *deadlift;
@@ -128,7 +171,7 @@ NSDictionary *json = @{
         @"deadlift" : @"405"
 };
 
-StrengthLog *log = [StrengthLog new];
+PowerLifter *lifter = [PowerLifter new];
 [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:log usingMapping:@{
         @"bench" : @"bench", // Forgot to write boxValueAsNSNumberIntoPropertyWithName:?
         @"squat" : @"squat", // Don't worry!
