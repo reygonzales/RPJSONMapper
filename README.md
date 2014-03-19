@@ -122,7 +122,7 @@ NSDictionary *json = @{
 Car *firstReportOfYear = [Car new];
 
 [[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:car usingMapping:@{
-        @"Mustang" : @{
+        @"MuscleCar" : @{
                 @"specifications" : @{ // Map sub-JSON
                         @"hp" : @"horsePower"
                 },
