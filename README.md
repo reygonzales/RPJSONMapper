@@ -98,11 +98,45 @@ The second type of boxing is for NSDates and is demonstrated with the key-value 
 This, just like the other two key-value pairs, takes the value of `"birthDate"` from the JSON dictionary (@"11-08-1988"), gets the NSDate value of it using the date format (@"MM-dd-yyyy") and then sets it into `@property (nonatomic, strong) NSDate *birthDate`. The underlying NSDateFormatter is an instance variable of the RPJSONMapper and is accessed only in a @synchronized call (so it is multi-threaded safe).
 
 ## But Wait, There's More! ##
+### Sub-JSON mapping ###
+```Objective-C
+@interface Car : NSObject
+@property (nonatomic, copy) NSString *make;
+@property (nonatomic, copy) NSString *model;
+@property (nonatomic, strong) NSNumber *horsePower;
+@end
+
+...
+
+NSDictionary *json = @{
+        @"Mustang" : @{
+                @"specifications" : @{
+                        @"hp" : 199.0
+                },
+                @"make" : @"Ford",
+                @"modelName" : @"Mustang"
+        }
+        ...
+};
+
+Car *firstReportOfYear = [Car new];
+
+[[RPJSONMapper sharedInstance] mapJSONValuesFrom:json toInstance:car usingMapping:@{
+        @"Mustang" : @{
+                @"specifications" : @{ // Map sub-JSON
+                        @"hp" : @"horsePower"
+                },
+                @"make" : @"make",
+                @"modelName" : @"model"
+        }
+};
+```
+
 ### Array mapping ###
 ```Objective-C
 @interface WeatherReport : NSObject
 @property (nonatomic, copy) NSString *weatherDescription;
-@property (nonatomic, copy) NSNumber *temperature;
+@property (nonatomic, strong) NSNumber *temperature;
 @end
 
 ...
