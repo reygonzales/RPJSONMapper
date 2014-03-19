@@ -109,7 +109,7 @@ This, just like the other two key-value pairs, takes the value of `"birthDate"` 
 ...
 
 NSDictionary *json = @{
-        @"Mustang" : @{
+        @"MuscleCar" : @{
                 @"specifications" : @{
                         @"hp" : 199.0
                 },
