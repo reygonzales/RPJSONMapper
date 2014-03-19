@@ -88,7 +88,14 @@ The first key-value pair in the mapping dictionary is `@"firstName" : @"givenNam
 
 Another key-value pair is `@"zip" : [[RPJSONMapper sharedInstance] boxValueAsNSStringIntoPropertyWithName:@"zip"]`. This mapping retrieves the value of `"zip"` from the JSON dictionary (@94015), gets the string value of it (@"94015") and then sets it into `@property (nonatomic, copy) NSString *zip` for `person`. We box the value as an NSString because we cannot store an NSNumber into an NSString.
 
-The second type of boxing is for NSDates and is demonstrated with the key-value pair `@"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" usingDateFormat:@"MM-dd-yyyy"]`. This, just like the other two key-value pairs, takes the value of `"birthDate"` from the JSON dictionary (@"11-08-1988"), gets the NSDate value of it using the date format (@"MM-dd-yyyy") and then sets it into `@property (nonatomic, strong) NSDate *birthDate`. The underlying NSDateFormatter is an instance variable of the RPJSONMapper and is accessed only in a @synchronized call (so it is multi-threaded safe).
+The second type of boxing is for NSDates and is demonstrated with the key-value pair 
+
+```Objective-C
+@"birthDate" : [[RPJSONMapper sharedInstance] boxValueAsNSDateIntoPropertyWithName:@"birthDate" 
+                                                                    usingDateFormat:@"MM-dd-yyyy"]
+```
+
+This, just like the other two key-value pairs, takes the value of `"birthDate"` from the JSON dictionary (@"11-08-1988"), gets the NSDate value of it using the date format (@"MM-dd-yyyy") and then sets it into `@property (nonatomic, strong) NSDate *birthDate`. The underlying NSDateFormatter is an instance variable of the RPJSONMapper and is accessed only in a @synchronized call (so it is multi-threaded safe).
 
 ## But Wait, There's More! ##
 ### Array mapping ###
